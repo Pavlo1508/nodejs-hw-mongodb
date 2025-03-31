@@ -43,36 +43,36 @@ export const setupServer = () => {
 
   app.get('/contacts/:contactId', async (req, res) => {
     const { contactId } = req.params;
-		 if (!mongoose.Types.ObjectId.isValid(contactId)) {
-       return res.status(400).json({
-         status: 400,
-         message: 'Invalid contact ID format',
-       });
-     }
+    if (!mongoose.Types.ObjectId.isValid(contactId)) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Invalid contact ID format',
+      });
+    }
 
-     try {
-       const contact = await getContactById(contactId);
+    try {
+      const contact = await getContactById(contactId);
 
-       if (!contact) {
-         return res.status(404).json({
-           status: 404,
-           message: 'Contact not found',
-         });
-       }
+      if (!contact) {
+        return res.status(404).json({
+          status: 404,
+          message: 'Contact not found',
+        });
+      }
 
-       res.status(200).json({
-         status: 200,
-         message: `Successfully found contact with id ${contactId}!`,
-         data: contact,
-       });
-     } catch (error) {
-       console.error('Error fetching contact:', error);
-       res.status(500).json({
-         status: 500,
-         message: 'Internal server error',
-       });
-     }
-	});
+      res.status(200).json({
+        status: 200,
+        message: `Successfully found contact with id ${contactId}!`,
+        data: contact,
+      });
+    } catch (error) {
+      console.error('Error fetching contact:', error);
+      res.status(500).json({
+        status: 500,
+        message: 'Internal server error',
+      });
+    }
+  });
 
   app.use('*', (req, res, next) => {
     res.status(404).json({
