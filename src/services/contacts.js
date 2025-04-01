@@ -42,5 +42,3 @@ export const deleteContact = async (contactId) => {
 
   return contact;
 };
-
-
