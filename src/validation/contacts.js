@@ -1,6 +1,7 @@
 // src/validation/contacts.js
 
 import Joi from 'joi';
+import { isValidObjectId } from 'mongoose';
 
 export const createContactSchema = Joi.object({
   _id: Joi.string(),
@@ -12,7 +13,13 @@ export const createContactSchema = Joi.object({
     .min(3)
     .max(20)
     .valid('work', 'home', 'personal')
-    .required(),
+		.required(),
+	userId: Joi.string().custom((value, helper) => {
+		    if (value && !isValidObjectId(value)) {
+		      return helper.message('User id should be a valid mongo id');
+		    }
+		    return true;
+		 }),
 });
 
 export const updateContactSchema = Joi.object({
