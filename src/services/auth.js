@@ -18,7 +18,7 @@ export const registerUser = async (payload) => {
   return await UsersCollection.create({
     ...payload,
     password: encryptedPassword,
-	});
+  });
 };
 
 export const loginUser = async (payload) => {
