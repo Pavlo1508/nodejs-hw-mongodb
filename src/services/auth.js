@@ -172,8 +172,3 @@ export const resetPassword = async (payload) => {
     { password: encryptedPassword },
   );
 };
-
-
-
-
-

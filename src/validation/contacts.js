@@ -24,9 +24,9 @@ export const createContactSchema = Joi.object({
 
 export const updateContactSchema = Joi.object({
   _id: Joi.string(),
-  name: Joi.string().min(3).max(20),
+  name: Joi.string().min(3),
   phoneNumber: Joi.number().integer(),
-  email: Joi.string().min(3).max(20).allow(null, ''),
+  email: Joi.string().min(3).allow(null, ''),
   isFavourite: Joi.boolean(),
-  contactType: Joi.string().min(3).max(20).valid('work', 'home', 'personal'),
+  contactType: Joi.string().min(3).valid('work', 'home', 'personal'),
 });
