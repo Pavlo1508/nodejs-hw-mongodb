@@ -16,6 +16,9 @@ import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
+import { getEnvVar } from '../utils/getEnvVar.js';
+
 export const getContactsController = async (req, res, next) => {
   try {
     const { page, perPage } = parsePaginationParams(req.query);
@@ -68,7 +71,11 @@ export const createContactController = async (req, res, next) => {
     const photo = req.file;
     let photoUrl;
     if (photo) {
-      photoUrl = await saveFileToUploadDir(photo);
+      if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
+        photoUrl = await saveFileToCloudinary(photo);
+      } else {
+        photoUrl = await saveFileToUploadDir(photo);
+      }
     }
     const contact = await createContact({
       ...req.body,
@@ -94,8 +101,12 @@ export const patchContactController = async (req, res, next) => {
     let photoUrl;
 
     if (photo) {
-      photoUrl = await saveFileToUploadDir(photo);
-		}
+      if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
+        photoUrl = await saveFileToCloudinary(photo);
+      } else {
+        photoUrl = await saveFileToUploadDir(photo);
+      }
+    }
 
     const result = await updateContact(contactId, req.user._id, {
       ...req.body,
