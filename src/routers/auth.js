@@ -1,5 +1,4 @@
 // src/routers/auth.js
-
 import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { registerUserSchema } from '../validation/auth.js';
@@ -13,6 +12,9 @@ import { requestResetEmailSchema } from '../validation/auth.js';
 import { requestResetEmailController } from '../controllers/auth.js';
 import { resetPasswordSchema } from '../validation/auth.js';
 import { resetPasswordController } from '../controllers/auth.js';
+import { getGoogleOAuthUrlController } from '../controllers/auth.js';
+import { loginWithGoogleOAuthSchema } from '../validation/auth.js';
+import { loginWithGoogleController } from '../controllers/auth.js';
 
 const router = Router();
 
@@ -43,5 +45,13 @@ router.post(
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
 );
+
+router.post(
+  '/confirm-oauth',
+  validateBody(loginWithGoogleOAuthSchema),
+  ctrlWrapper(loginWithGoogleController),
+);
+
+router.get('/get-oauth-url', ctrlWrapper(getGoogleOAuthUrlController));
 
 export default router;

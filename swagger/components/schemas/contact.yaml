@@ -1,0 +1,37 @@
+# swagger/components/schemas/contact.yaml
+type: object
+required:
+  - _id
+  - name
+  - phoneNumber
+  - contactType
+  - userId
+properties:
+  _id:
+    description: "contact's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  name:
+    description: "contact's name"
+    type: string
+    example: 'John Doe'
+  phoneNumber:
+    description: "contact's age"
+    type: string
+    example: '000111222'
+  isFavourite:
+    description: "favourite contacts"
+    type: boolean
+    example: true
+  contactType:
+    description: "type of contact"
+    type: string
+    enum: ['male', 'female', 'other']
+  userId:
+    description: "Contact's parent id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  photo:
+    description: "Link to contact's photo"
+    type: string
+    example: https://res.cloudinary.com/uqwgdu/image/upload/image.png

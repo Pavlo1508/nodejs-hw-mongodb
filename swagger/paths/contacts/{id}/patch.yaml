@@ -1,0 +1,64 @@
+# swagger/paths/contacts/{id}/patch.yaml
+tags:
+  - Contacts
+summary: Update contact
+operationId: updateContact
+description: 'Update a contact'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: "contact's name"
+            type: string
+            example: 'John Doe'
+          phoneNumber:
+            description: "contact's age"
+            type: string
+            example: '000111222'
+          isFavourite:
+            description: "favourite contacts"
+            type: boolean
+            example: true
+          contactType:
+            description: "type of contact"
+            type: string
+            enum: ['male', 'female', 'other']
+          photo:
+            description: "Contact's photo"
+            type: string
+            format: binary
+responses:
+  '200':
+    description: Update a Contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully patched a contact!
+            data:
+              type: object
+              $ref: ../../../components/schemas/contact.yaml
+  '404':
+    $ref: ../../../components/responses/404.yaml
