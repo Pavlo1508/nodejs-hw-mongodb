@@ -198,9 +198,9 @@
                     "description": "type of contact",
                     "type": "string",
                     "enum": [
-                      "male",
-                      "female",
-                      "other"
+                      "work",
+                      "home",
+                      "personal"
                     ]
                   },
                   "userId": {
@@ -361,9 +361,9 @@
                     "description": "type of contact",
                     "type": "string",
                     "enum": [
-                      "male",
-                      "female",
-                      "other"
+                      "work",
+                      "home",
+                      "personal"
                     ]
                   },
                   "photo": {
