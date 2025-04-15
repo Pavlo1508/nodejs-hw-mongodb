@@ -34,7 +34,7 @@ requestBody:
           contactType:
             description: "type of contact"
             type: string
-            enum: ['male', 'female', 'other']
+            enum: ['work', 'home', 'personal']
           photo:
             description: "Contact's photo"
             type: string

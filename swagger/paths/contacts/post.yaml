@@ -30,7 +30,7 @@ requestBody:
           contactType:
             description: "type of contact"
             type: string
-            enum: ['male', 'female', 'other']
+            enum: ['work', 'home', 'personal']
           userId:
             description: "Contact's parent id"
             type: string
